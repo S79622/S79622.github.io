@@ -8,12 +8,12 @@
     <style>
         /* UPDATED COLOR PALETTE: Deep Ocean Blue Accent */
         :root {
-            --color-background: #F8F9FA; /* Soft white/light grey */
-            --color-card-background: #FFFFFF; /* Pure white for cards */
-            --color-text: #212529; /* Dark grey for readability */
-            --color-subtle-text: #6C757D; /* Medium grey for secondary info */
-            --color-accent: #004D99; /* Deep Ocean Blue Accent (was #007BFF) */
-            --color-border: #E9ECEF; /* Very light grey border */
+            --color-background: #F8F9FA; 
+            --color-card-background: #FFFFFF; 
+            --color-text: #212529; 
+            --color-subtle-text: #6C757D; 
+            --color-accent: #004D99; /* Deep Ocean Blue Accent */
+            --color-border: #E9ECEF; 
         }
 
         * {
@@ -36,7 +36,7 @@
             gap: 15px;
             max-width: 1200px;
             margin: 0 auto;
-            /* Default desktop layout: 3 columns */
+            /* Desktop layout: 3 columns */
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: auto;
         }
@@ -48,13 +48,14 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden; 
         }
 
+        /* Subtle Hover Effect */
         .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transform: scale(1.01); 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
         }
 
         /* Desktop Spanning */
@@ -62,8 +63,52 @@
             grid-column: span 2;
             grid-row: span 2;
             justify-content: space-between;
+            
+            /* --- PROFILE CARD BACKGROUND IMAGE STYLES --- */
+            background-image: url('bg.jpg'); /* 1. Set the image path */
+            background-size: cover;          /* 2. Scale the image to cover the card */
+            background-position: center;     /* 3. Center the image within the card */
+            background-repeat: no-repeat;    /* 4. Prevent the image from tiling */
+            
+            /* Change base text color to white for better contrast */
+            color: white !important; 
+            position: relative;
+        }
+        
+        /* Dark Overlay for Readability */
+        .card-profile::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3); /* Black overlay with 30% opacity */
+            border-radius: 12px; 
+            z-index: 1; 
         }
 
+        /* Ensure all content within the card is above the overlay */
+        .card-profile > * {
+            z-index: 2;
+            position: relative; 
+        }
+        
+        /* Overrides for text color inside the profile card */
+        .card-profile .profile-header p,
+        .card-profile p {
+            color: rgba(255, 255, 255, 0.8) !important; /* Lighter white for subtle text */
+        }
+        
+        .card-profile .social-link {
+            color: white !important; /* Keep links visible */
+        }
+        
+        .card-profile .social-link:hover {
+            color: #CCCCFF !important; /* Hover effect */
+        }
+        
+        /* Default Spanning */
         .card-playlist {
             grid-column: span 3;
             height: 100px;
@@ -77,7 +122,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: var(--color-text);
+            color: var(--color-text); /* Default color, overridden for profile card */
         }
 
         .profile-header h1 {
@@ -106,7 +151,7 @@
         }
 
         .social-link:hover {
-            color: #003366; /* Darker accent on hover */
+            color: #003366; 
         }
 
         .location-info {
@@ -127,7 +172,7 @@
             color: var(--color-subtle-text);
         }
 
-        .stack-list, .case-study-details {
+        .stack-list {
             list-style: none;
             padding-left: 0;
         }
@@ -141,18 +186,23 @@
             border-bottom: none;
         }
 
-        .hobby-info {
-            text-align: center;
+        .hobby-info, .reflection-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .hobby-info h3 {
             color: var(--color-accent);
             margin-bottom: 5px;
+        }
+
+        .reflection-content p {
+            color: var(--color-subtle-text);
+            line-height: 1.5;
         }
         
         /* Mobile Layout: Stacked vertically */
@@ -191,9 +241,9 @@
                 <div class="card-title">Innovating food safety.</div>
                 <p>ALLYYA SOLEHAH BINTI KAMARUDDIN</p>
                 <div class="social-links">
-                    <a href="#" class="social-link">LinkedIn</a>
-                    <a href="#" class="social-link">GitHub</a>
-                    <a href="#" class="social-link" style="color: var(--color-subtle-text);">UMT Portal</a>
+                    <a href="#" class="social-link" target="_blank">LinkedIn</a>
+                    <a href="#" class="social-link" target="_blank">GitHub</a>
+                    <a href="#" class="social-link" target="_blank" style="color: rgba(255, 255, 255, 0.8) !important;">UMT Portal</a>
                 </div>
             </div>
         </div>
@@ -203,12 +253,20 @@
             <div class="location-info">
                 <h2>UMT, Kuala Nerus</h2>
                 <p>Kuala Terengganu, MY</p>
-                <p>2:33 PM, Sunday</p> </div>
+                <p>3:33 PM, Sunday</p> 
+            </div>
         </div>
 
+        <div class="bento-card card-reflection">
+            <div class="card-title">Why Food Tech Matters in Malaysia</div>
+            <div class="reflection-content">
+                <p>Sustainable food security is crucial for our future. By optimizing local processing methods, we can reduce waste and improve nutrition.</p>
+            </div>
+        </div>
+        
         <div class="bento-card card-hobby">
             <div class="card-title">Campus Activity</div>
-            <div class="hobby-info">
+            <div class="hobby-info" style="text-align: center; align-items: center;">
                 <h3>Evening Jogs</h3>
                 <p>Sport Complex UMT</p>
             </div>
