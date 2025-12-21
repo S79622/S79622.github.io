@@ -1,9 +1,9 @@
-       <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab Timer | Scientific Precision</title>
+    <title>Lab Timer | Case Study</title>
     <style>
         :root {
             --bg-color: #e3f2fd;
@@ -21,26 +21,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
         }
 
-        .container {
+        /* Case Study Card Container */
+        .case-study-card {
+            display: flex;
             background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(33, 150, 243, 0.15);
-            text-align: center;
-            width: 320px;
-            border: 2px solid #bbdefb;
+            width: 850px;
+            max-width: 95%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #bbdefb;
+        }
+
+        /* Left Column: The Interactive App */
+        .app-column {
+            flex: 1.2;
+            padding: 40px;
+            background: #f8fbfe;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #e3f2fd;
+        }
+
+        /* Right Column: Case Study Details */
+        .info-column {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         #lab-icon {
             font-size: 80px;
             margin-bottom: 20px;
-            display: block;
-            transition: all 0.3s ease;
         }
 
         .analyzing {
@@ -48,101 +68,101 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         #timer-display {
             font-size: 54px;
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-            margin: 10px 0;
             color: var(--accent-blue);
-        }
-
-        .status-label {
-            text-transform: uppercase;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
             margin-bottom: 20px;
-            color: #546e7a;
         }
 
         .controls {
             display: flex;
             gap: 10px;
-            justify-content: center;
-            margin-top: 25px;
         }
 
-        button {
-            background: #eceff1;
-            border: 1px solid #cfd8dc;
-            padding: 10px 18px;
+        .controls button {
+            padding: 10px 15px;
             border-radius: 8px;
-            color: var(--text-color);
-            font-weight: 600;
+            border: 1px solid #cfd8dc;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            transition: all 0.2s;
         }
 
-        button:hover {
-            background: #e1f5fe;
-            border-color: var(--accent-blue);
+        #start-btn { background: var(--accent-blue); color: white; border: none; }
+
+        /* The New "Try My Lab Timer App" Button */
+        .external-btn {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            background: linear-gradient(135deg, #2196f3 0%, #00bcd4 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            transition: all 0.3s ease;
         }
 
-        #start-btn { 
-            background: var(--accent-blue); 
-            color: white; 
-            border: none;
-        }
-        
-        #start-btn:hover {
-            background: #1976d2;
+        .external-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+            filter: brightness(1.1);
         }
 
-        /* Scientific Grid Background */
-        .grid-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(#2196f3 0.5px, transparent 0.5px);
-            background-size: 30px 30px;
-            opacity: 0.1;
-            z-index: -1;
+        h2 { margin-top: 0; color: var(--accent-blue); }
+        p { line-height: 1.6; color: #546e7a; font-size: 15px; }
+
+        @media (max-width: 768px) {
+            .case-study-card { flex-direction: column; }
+            .app-column { border-right: none; border-bottom: 1px solid #e3f2fd; }
         }
     </style>
 </head>
 <body>
-<a href="https://s79622.github.io" style="position:absolute; top:20px; left:20px;">← Back to Portfolio</a>
 
-    <div class="grid-bg"></div>
+    <div class="case-study-card">
+        <div class="app-column">
+            <div id="status" style="font-size: 12px; font-weight: bold; color: #90a4ae; margin-bottom: 10px; text-transform: uppercase;">System Ready</div>
+            <div id="lab-icon">🧪</div>
+            <div id="timer-display">15:00</div>
+            
+            <div class="controls">
+                <button id="start-btn" onclick="startTimer()">Begin</button>
+                <button onclick="pauseTimer()">Pause</button>
+                <button onclick="resetTimer()">Reset</button>
+            </div>
+        </div>
 
-    <div class="container">
-        <div id="status" class="status-label">Ready for Experiment</div>
-        <div id="lab-icon">🧪</div>
-        <div id="timer-display">15:00</div>
-        
-        <div class="controls">
-            <button id="start-btn" onclick="startTimer()">Begin Analysis</button>
-            <button id="pause-btn" onclick="pauseTimer()">Pause</button>
-            <button id="reset-btn" onclick="resetTimer()">Reset</button>
+        <div class="info-column">
+            <h2>Lab Timer Project</h2>
+            <p>Developed as a specialized productivity tool for high-focus environments. This application features state-driven UI changes, precise interval logic, and a clean scientific aesthetic.</p>
+            
+            <a href="https://s79622.github.io/" class="external-btn">
+                Try My Lab Timer App
+            </a>
         </div>
     </div>
 
-    <audio id="alarm-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+    <audio id="finish-sound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
 
     <script>
         const DEFAULT_TIME = 15 * 60;
         let timeLeft = DEFAULT_TIME;
-        let timerId = null;
-        let isRunning = false;
-
-        const icon = document.getElementById('lab-icon');
+        let timerInterval = null;
+        
+        const labIcon = document.getElementById('lab-icon');
         const timerDisplay = document.getElementById('timer-display');
         const statusLabel = document.getElementById('status');
-        const alarm = document.getElementById('alarm-sound');
+        const finishSound = document.getElementById('finish-sound');
 
         function updateDisplay() {
             const minutes = Math.floor(timeLeft / 60);
@@ -151,47 +171,41 @@
         }
 
         function startTimer() {
-            if (isRunning) return;
+            if (timerInterval) return;
+            statusLabel.textContent = "Analyzing...";
+            labIcon.textContent = "🔬";
+            labIcon.classList.add('analyzing');
             
-            isRunning = true;
-            statusLabel.textContent = "Analyzing Samples...";
-            icon.textContent = "🔬";
-            icon.classList.add('analyzing');
-            
-            timerId = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerId);
-                    completeExperiment();
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateDisplay();
+                } else {
+                    completeSession();
                 }
             }, 1000);
         }
 
         function pauseTimer() {
-            clearInterval(timerId);
-            isRunning = false;
-            statusLabel.textContent = "Analysis Paused";
-            icon.classList.remove('analyzing');
+            clearInterval(timerInterval);
+            timerInterval = null;
+            statusLabel.textContent = "Suspended";
+            labIcon.classList.remove('analyzing');
         }
 
         function resetTimer() {
-            clearInterval(timerId);
-            isRunning = false;
+            pauseTimer();
             timeLeft = DEFAULT_TIME;
-            statusLabel.textContent = "Ready for Experiment";
-            icon.textContent = "🧪";
-            icon.classList.remove('analyzing');
             updateDisplay();
+            statusLabel.textContent = "System Ready";
+            labIcon.textContent = "🧪";
         }
 
-        function completeExperiment() {
-            isRunning = false;
-            statusLabel.textContent = "Analysis Complete";
-            icon.textContent = "✅";
-            icon.classList.remove('analyzing');
-            alarm.play();
+        function completeSession() {
+            pauseTimer();
+            labIcon.textContent = "✅";
+            statusLabel.textContent = "Complete";
+            finishSound.play();
         }
 
         updateDisplay();
