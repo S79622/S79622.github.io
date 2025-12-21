@@ -1,0 +1,65 @@
+🔬 Lab Timer & Focus Companion
+A specialized web-based productivity tool designed for high-focus scientific environments. This application combines a precision countdown timer with a persistent lab checklist to streamline experimental workflows.
+
+
+🧪 Overview
+The Lab Timer is a minimalist, single-file web application that leverages a "Scientific Blue" aesthetic to provide a professional and calm workspace for students and researchers. It uses state-aware logic to transition through different stages of a research "Analysis" session.
+
+
+
+
+
+🧬 Key Features
+📡 State-Aware Interface
+The application interface reflects the current progress of the experiment through dynamic emoji states and CSS animations:
+
+
+
+Ready State (🧪): The default idle state where the system is prepared for a new session.
+
+
+
+Analyzing State (🔬): Activated during the 15-minute countdown, featuring a pulsing animation to simulate active work.
+
+
+
+Complete State (✅): Triggered once the timer reaches zero, accompanied by a notification chime.
+
+
+📝 Integrated Lab Checklist
+To ensure no steps are missed during a focus block, the app includes a persistent checklist:
+
+
+Dynamic Task Entry: Quickly add experimental steps via the input field.
+
+
+LocalStorage Persistence: Tasks are saved in the browser's local storage, ensuring data remains intact even after a page refresh.
+
+
+Interactive Management: Users can toggle strike-throughs for completed tasks or clear the entire list with a single click.
+
+⏱️ Precision Timer Logic
+
+Default Duration: Pre-set to 15 minutes, optimized for standard laboratory intervals.
+
+
+Comprehensive Controls: Includes Start, Pause, and Reset functionalities to manage unexpected interruptions during analysis.
+
+
+
+Notification System: Features an audible alert to signify the completion of the countdown.
+
+🎨 Design Aesthetic
+The application follows a "Scientific Blue" color palette, utilizing soft pastel blues and a subtle radial grid background to mimic laboratory documentation. It is designed with a responsive "Case Study Card" layout, making it suitable for integration into professional portfolios.
+
+
+
+🚀 Technical Implementation
+
+Architecture: Built as a standalone index.html file containing all CSS and JavaScript.
+
+
+Styles: Modular CSS variables for easy theme swapping.
+
+
+Persistence: JSON-based localStorage management for user tasks.
